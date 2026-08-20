@@ -127,3 +127,30 @@ poetry run pytest -v
 Tests cover the happy path, RPN-expressed operator precedence, every
 supported operator, and error handling (stack underflow, division by zero,
 unknown operators, non-numeric tokens, and invalid math domains).
+
+## Development
+
+Common commands for local development:
+
+```bash
+# Install runtime and dev dependencies
+poetry install
+
+# Run the API with auto-reload
+poetry run uvicorn app.main:app --reload
+
+# Run the full test suite
+poetry run pytest -v
+
+# Run a single test file
+poetry run pytest tests/test_rpn.py -v
+```
+
+The core RPN evaluation logic lives in `app/rpn.py` and is unit-tested
+independently of the HTTP layer in `tests/test_rpn.py`; the FastAPI wiring
+in `app/main.py` is covered by `tests/test_api.py`.
+
+## License
+
+No license file is included yet; treat this repository as all-rights-reserved
+until a `LICENSE` file is added.
