@@ -127,3 +127,39 @@ poetry run pytest -v
 Tests cover the happy path, RPN-expressed operator precedence, every
 supported operator, and error handling (stack underflow, division by zero,
 unknown operators, non-numeric tokens, and invalid math domains).
+
+## Development
+
+Common commands for working on this project:
+
+```bash
+# Install runtime + dev dependencies
+poetry install
+
+# Run the full test suite
+poetry run pytest -v
+
+# Run a single test file or test case
+poetry run pytest tests/test_rpn.py -v
+poetry run pytest tests/test_rpn.py::test_error_division_by_zero -v
+
+# Start the API with auto-reload for local development
+poetry run uvicorn app.main:app --reload
+```
+
+Project layout:
+
+```
+app/
+  main.py    # FastAPI app and the /calculate endpoint
+  rpn.py     # RPN evaluation engine (tokenizing, stack, operators)
+tests/
+  test_api.py   # Integration tests against the HTTP endpoint
+  test_rpn.py   # Unit tests for the evaluation engine
+```
+
+## License
+
+No license file is currently included in this repository, so all rights are
+reserved by default. If you intend to reuse this code, please open an issue
+to discuss adding an explicit open-source license (e.g. MIT).
